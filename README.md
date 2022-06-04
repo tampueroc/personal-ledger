@@ -1,5 +1,5 @@
 # Personal Ledger
 Text based double-entry personal ledger
 
-Requirements:
+# Requirements:
 - Python 3.10.4
