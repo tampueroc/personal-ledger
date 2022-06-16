@@ -1,6 +1,3 @@
-
-
-
 from ledger_models import Transaction
 
 
@@ -17,3 +14,4 @@ class Ledger:
 
         # Write into .ledger
         self._ledger.write(data.__str__())
+        
