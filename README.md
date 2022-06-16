@@ -14,3 +14,7 @@ Every financial transaction gets two entries, "debit" and "credit". Each entry a
 <account> <amount>
 <account> <amount>
 ```
+
+# References
+[Plain Text Accounting Org](https://plaintextaccounting.org/)
+[ledger.py](https://github.com/mafm/ledger.py)
