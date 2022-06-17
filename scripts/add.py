@@ -4,7 +4,7 @@ from dateutil.parser import ParserError
 from ledger import Ledger
 from ledger_models import Account, Transaction
 
-# TODO Unknown Parse Error when Entry has one value (or there isn't any whitespace)
+# TODO Should VALUE_A == VALUE_B
 def add_transaction_cli():
     try:
         print("$ Add Transaction record")
@@ -21,8 +21,8 @@ def add_transaction_cli():
 
         transaction_data = Transaction( date=date, desc=desc, account_a=account_a, value_a=value_a, account_b=account_b, value_b=value_b)
         Ledger().add_transaction( transaction_data=transaction_data)
-    except ValueError:
-        add_transaction_cli()
+    except ValueError as e:
+        print(e)
     except ParseError:
         add_transaction_cli()
 
