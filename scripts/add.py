@@ -1,9 +1,7 @@
 import datetime
-from lib2to3.pgen2.parse import ParseError
 
 from ledger import Ledger
-from ledger_models import Transaction
-from scripts.errors import DateInputError
+from ledger_models import Account, Transaction
 
 
 def add_transaction_cli():
@@ -24,3 +22,9 @@ def add_transaction_cli():
         Ledger().add_transaction( transaction_data=transaction_data)
     except ValueError as e:
         add_transaction_cli()
+
+def add_account_cli():
+    print("$ Add Account")
+    cli_command = input(" entry account (with hierarchy)")
+    account_data = Account(account_name=cli_command)
+    Ledger().add_account(account_data= account_data)
