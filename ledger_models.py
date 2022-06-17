@@ -1,3 +1,4 @@
+from dateutil.parser import parse, ParserError
 from pydantic import BaseModel, validator
 
 class Transaction(BaseModel):
@@ -7,6 +8,14 @@ class Transaction(BaseModel):
     value_a: str
     account_b: str
     value_b: str
+
+    @validator("date")
+    def valid_date(cls, v:str):
+        try:
+            parsed_date = parse(v, dayfirst=True)
+            return parsed_date
+        except ParserError as e:
+            print(e)
 
     @validator("value_a", "value_b")
     def is_value_numeric(cls, v:str):
@@ -23,10 +32,12 @@ class Transaction(BaseModel):
 
 
 class Account(BaseModel):
-    parent:str
+    root:str = ""
+    deep:int = 0
     account_name:str
-
-
-    @validator(parent)
-    def valid_parent(cls, v):
-        if v not in ["Expenses", "Assets", "Income", "Liabilities", "Equitiy"] 
+    
+    # @validator(account_name)
+    # def parse_account_name(cls, v):
+    #     cls.account_name = v.split(":")
+    #     cls.root = cls.account_name[0]
+    #     cls.deep = len(cls.account_name)
