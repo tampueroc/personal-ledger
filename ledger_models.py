@@ -2,7 +2,7 @@ from datetime import datetime
 from pydantic import BaseModel, NegativeFloat, PositiveFloat, validator
 
 class Transaction(BaseModel):
-    date: datetime.date
+    date: datetime
     desc: str
     account_a: str
     value_a: PositiveFloat

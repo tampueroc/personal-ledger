@@ -1,5 +1,6 @@
 import datetime
 from dateutil.parser import parse, ParserError
+from pydantic import ValidationError
 from ledger import Ledger
 from ledger_models import Account, Transaction
 
@@ -8,7 +9,7 @@ def add_transaction_cli():
     try:
         print("$ Add Transaction record")
         cli_input = input("$ date (dd-mm-yyyy)\n") 
-        date = datetime.date.today().strftime("%d-%m-%Y") if cli_input == "" else parse(cli_input, dayfirst=True).strftime("%d-%m-%Y")
+        date = datetime.date.today() if cli_input == "" else parse(cli_input, dayfirst=True).strftime("%d-%m-%Y")
 
         cli_input = input("$ description\n")
         desc = cli_input
@@ -20,9 +21,11 @@ def add_transaction_cli():
 
         transaction_data = Transaction( date=date, desc=desc, account_a=account_a, value_a=value_a, account_b=account_b, value_b=value_b)
         Ledger().add_transaction( transaction_data=transaction_data)
-    except ValueError as e:
+    except ParserError as e:
         print(e)
-    except ParseError:
+        add_transaction_cli()
+    except ValidationError as e:
+        print(e)
         add_transaction_cli()
 
 def add_account_cli():
