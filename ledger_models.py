@@ -20,3 +20,13 @@ class Transaction(BaseModel):
         """
         s = f"\n{self.date} {self.desc}\n"+ f"\t{self.account_a} {self.value_a}\n" + f"\t{self.account_b} {self.value_b}"
         return s
+
+
+class Account(BaseModel):
+    parent:str
+    account_name:str
+
+
+    @validator(parent)
+    def valid_parent(cls, v):
+        if v not in ["Expenses", "Assets", "Income", "Liabilities", "Equitiy"] 
