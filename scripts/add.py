@@ -1,6 +1,5 @@
 import datetime
-from lib2to3.pgen2.parse import ParseError
-from dateutil.parser import ParserError
+from dateutil.parser import parse, ParserError
 from ledger import Ledger
 from ledger_models import Account, Transaction
 
@@ -9,7 +8,7 @@ def add_transaction_cli():
     try:
         print("$ Add Transaction record")
         cli_input = input("$ date (dd-mm-yyyy)\n") 
-        date = datetime.date.today().strftime("%d-%m-%Y") if cli_input == "" else cli_input
+        date = datetime.date.today().strftime("%d-%m-%Y") if cli_input == "" else parse(cli_input, dayfirst=True).strftime("%d-%m-%Y")
 
         cli_input = input("$ description\n")
         desc = cli_input
