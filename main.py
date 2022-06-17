@@ -8,6 +8,8 @@ if __name__ == "__main__":
     while(command!="exit"):
         if command == "add":
             add_transaction_cli()
+        else:
+            print("Unknown command")
         command = input(">>> ")
         
 
